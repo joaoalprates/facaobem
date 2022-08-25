@@ -31,10 +31,18 @@ class Instituicao extends Model
         'telefone',
     ];
 
-    public static function buscarInstituicoes(string $estado, string $municipio){
+    public static function buscarInstituicoesEstadoMunicipio(string $estado, string $municipio){
         return Capsule::select("
-        SELECT *
+        SELECT nome, logradouro + ' ' + ISNULL(numero, '') + ' ' + ISNULL(complemento, '') as endereco, bairro, municipio, estado, cep
         FROM instituicoes
         WHERE estado = ? AND municipio = ?", [$estado, $municipio]);
     }
+
+    public static function buscarInstituicoesEstado(string $estado){
+        return Capsule::select("
+        SELECT nome, logradouro + ' ' + ISNULL(numero, '') + ' ' + ISNULL(complemento, '') as endereco, bairro, municipio, estado, cep
+        FROM instituicoes
+        WHERE estado = ?", [$estado]);
+    }
+
 }

@@ -9,6 +9,7 @@
     <meta name="author" content="Augusto Lumi">
 
       <link href="././public/css/bootstrap.min.css" rel="stylesheet">
+      <link href="././public/css/datatables.min.css" rel="stylesheet">
 
     <style>
         .bi {
@@ -125,7 +126,20 @@
 
     <div class="row">
         <div class="col" id="lista-instituicoes">
-            
+            <table id="locais" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Nome do local</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Cep</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -157,16 +171,32 @@
 <script src=././public/js/jquery.min.js></script>
 <script src=././public/js/bootstrap.bundle.min.js></script>
 <script src=././public/js/notify.min.js></script>
+<script src=././public/js/datatables.min.js></script>
 
 <script>
 $().ready(function () {
+    $('#locais').DataTable({
+        data: null,
+        columns: [
+            { data: 'nome' },
+            { data: 'endereco' },
+            { data: 'bairro' },
+            { data: 'municipio' },
+            { data: 'estado' },
+            { data: 'cep' },
+        ],
+    });
+
     $('#pesquisar').click(function(){
         $.ajax({
             type: 'POST',
             url: 'index.php?r=CarregarInstituicoes&estado=' + $('#estado').val() + '&municipio=' + $('#municipio').val(),
             dataType: 'json',
-            success: function (data) {
-
+            success: function (dataSet) {
+                if(typeof dataSet[0] === 'undefined')
+                    dataSet = null;
+                $('#locais').dataTable().fnClearTable();
+                $('#locais').dataTable().fnAddData(dataSet);
             }, error: function (data) {
                 $.notify('Falha ao buscar pontos', "warning");
 
