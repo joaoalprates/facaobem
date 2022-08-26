@@ -3,6 +3,7 @@
 use FacaOBem\Controllers\HomeController;
 use FacaOBem\Controllers\InstituicaoController;
 use FacaOBem\Controllers\LoginController;
+use FacaOBem\Helpers\Session;
 
 require './bootstrap/autoload.php';
 
@@ -32,5 +33,11 @@ switch ($route) {
         break;
     case 'Sair':
         LoginController::sair();
+        break;
+    case 'Coleta':
+        if(!array_key_exists('idUsuario', Session::getAll())) {
+            header("Location: $base_url?r=Login");
+        }
+        ColetaController::index();
         break;
 }
