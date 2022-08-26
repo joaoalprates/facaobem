@@ -2,6 +2,7 @@
 
 use FacaOBem\Controllers\HomeController;
 use FacaOBem\Controllers\InstituicaoController;
+use FacaOBem\Controllers\LoginController;
 
 require './bootstrap/autoload.php';
 
@@ -22,5 +23,14 @@ switch ($route) {
         break;
     case 'CarregarInstituicoes':
         InstituicaoController::buscarInstituicoes($_GET['estado'], $_GET['municipio']);
+        break;
+    case 'Login':
+        LoginController::index();
+        break;
+    case 'VerificarLogin':
+        LoginController::verificarLogin($_GET['email'], $_GET['senha']);
+        break;
+    case 'Sair':
+        LoginController::sair();
         break;
 }

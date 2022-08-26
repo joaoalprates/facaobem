@@ -7,7 +7,7 @@
     <meta name="author" content="Augusto Lumi">
     <title>Ajude Alguém!</title>
     
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="././public/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bi {
@@ -18,7 +18,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="headers.css" rel="stylesheet">
+    <link href="././public/css/headers.css" rel="stylesheet">
   </head>
   <body>
     
@@ -35,7 +35,7 @@
   <div style="background-color: rgba(204,204,204,255);" >
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <img class="bi me-2" src="Logo.png" width="100" height="90" alt="Logo">
+        <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
       </div>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -43,34 +43,75 @@
       </ul>
 
       <div class="col-md-3 text-end">
-        <a href="home.html">
-          <button type="button" class="btn btn-outline-primary me-2">Voltar</button>
-        </a>
+          <button type="button" onclick="history.back()" class="btn btn-outline-primary me-2">Voltar</button>
       </div>
     </header>
     </div>
     
-  <form class="form-signin w-100 m-auto">
-
+  <form class="form-signin w-100 m-auto" id="formLogin" name="formLogin">
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+      <label for="email">E-mail</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Senha</label>
+      <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+      <label for="senha">Senha</label>
     </div>
-
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Lembre-me
       </label>
     </div>
       <a href="homeLogged.html">
-        <button class="w-100 btn btn-lg btn-primary" type="button">Entrar</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
       </a>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
   </form>
 
 </main>
+<script src=././public/js/jquery.min.js></script>
+<script src=././public/js/bootstrap.bundle.min.js></script>
+<script src=././public/js/jquery.validate.min.js></script>
+<script src=././public/js/additional-methods.min.js></script>
+<script src=././public/js/notify.min.js></script>
+<script>
+  $(function () {
+    $("#formLogin").validate({
+      rules: {
+        email: {
+          required: true,
+        },
+        senha: {
+          required: true,
+        }
+      },
+      messages: {
+        email: {
+          required: "Preencha o e-mail",
+        },
+        senha: {
+          required: "Preencha a senha",
+        },
+      },
+      submitHandler: function (form) {
+        $.ajax({
+          type: 'POST',
+          url: 'index.php?r=VerificarLogin&email=' + $('#email').val() + '&senha=' + $('#senha').val(),
+          data: $(form).serialize(),
+          dataType: "json",
+          success: function (data) {
+            if (data.status) {
+              window.location.href = "index.php";
+            } else {
+              $.notify(data.msg, "warning");
+            }
+          },
+          error: function (data) {
+            $.notify('Erro ao realizar login', "warning");
+          }
+        });
+      }
+    });
+  });
+</script>
+  </body>
 </html>

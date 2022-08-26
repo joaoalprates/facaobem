@@ -21,6 +21,7 @@ class Instituicao extends Model
         'nome',
         'cnpj',
         'descricao',
+        'situacao',
         'logradouro',
         'numero',
         'complemento',

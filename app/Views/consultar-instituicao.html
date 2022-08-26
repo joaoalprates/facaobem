@@ -96,6 +96,13 @@
 
       <div class="col-md-3 text-end">
           <button type="button" onclick="history.back()" class="btn btn-outline-primary me-2">Voltar</button>
+          <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
+          echo FacaOBem\Helpers\Session::get('nome');
+        ?>
+          | <a href="././index.php?r=Sair">
+          Sair
+      </a>
+          <?php }?>
       </div>
     </header>
     <p class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">Enconte um ponto de coleta perto de você!</p>
