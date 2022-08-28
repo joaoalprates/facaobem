@@ -4,7 +4,6 @@ namespace FacaOBem\Controllers;
 
 use FacaOBem\Models\Usuario;
 use FacaOBem\Helpers\Session;
-use http\Header;
 
 class LoginController
 {
@@ -13,13 +12,18 @@ class LoginController
         require './app/Views/login.html';
     }
 
+    public static function inscricao()
+    {
+        require './app/Views/inscricao.html';
+    }
+
     public static function sair()
     {
         Session::destroy();
         header("Location: index.php");
     }
 
-    public static function verificarLogin($email = '', $senha = '')
+    public static function verificarLogin($email = '', $senha = '', $redirect = '')
     {
         if($email == '' || $senha == ''){
             echo json_encode(array('status' => false, 'msg' => 'Preencha todos os dados'));
@@ -29,10 +33,26 @@ class LoginController
                 Session::set('idUsuario', $usuario[0]->idUsuario);
                 Session::set('nome', $usuario[0]->nome);
                 Session::set('email', $usuario[0]->email);
-                echo json_encode(array('status' => true, 'msg' => ''));
+                echo json_encode(array('status' => true, 'msg' => '', 'redirect' => $redirect));
             } else {
                 echo json_encode(array('status' => false, 'msg' => 'E-mail ou senha incorreta'));
             }
+        }
+    }
+
+    public static function create($post)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            try {
+                $usuario = new Usuario();
+                $usuario->fill($post);
+                $usuario->save();
+                echo json_encode(array('status' => true, 'msg' => ''));
+            } catch (\Exception $e) {
+                echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar cadastro'));
+            }
+        } else {
+            echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar cadastro'));
         }
     }
 }

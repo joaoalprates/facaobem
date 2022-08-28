@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Augusto Lumi">
+    <title>Ajude Alguém!</title>
+    
+<link href="././public/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="././public/css/headers.css" rel="stylesheet">
+    <link href="././public/css/form-validation.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  </head>
+  <body>
+
+    <main>
+
+      <h1 class="visually-hidden">Ajude Alguém</h1>
+
+      <div style="background-color: rgba(204,204,204,255);" >
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
+          </div>
+
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <h1>Ajude Alguém - Faça o Bem</h1>
+          </ul>
+
+          <div class="col-md-3 text-end">
+            <a href="index.php">
+              <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
+            </a>
+          </div>
+        </header>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="mb-3">Cadastre-se</h4>
+            <form class="needs-validation" novalidate id="formCadastro" name="formCadastro">
+              <div class="row g-3">
+                <div class="col-6">
+                  <label for="nome" class="form-label">Nome</label>
+                  <input type="text" class="form-control" id="nome" placeholder="Nome" value="" name="nome" required>
+                  <div class="invalid-feedback">
+                    Nome é obrigatório
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="email" class="form-label">E-mail</label>
+                  <input type="email" class="form-control" id="email" placeholder="E-mail" value="" name="email" required>
+                  <div class="invalid-feedback">
+                    E-mail é obrigatório
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="cpf" class="form-label">CPF</label>
+                  <input type="text" class="form-control" id="cpf" placeholder="CPF" value="" name="cpf" required>
+                  <div class="invalid-feedback">
+                    CPF é obrigatório
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="senha" class="form-label">Senha</label>
+                  <input type="password" class="form-control" id="senha" placeholder="" value="" name="senha" required>
+                  <div class="invalid-feedback">
+                    E-mail é obrigatório
+                  </div>
+                </div>
+              </div>
+              <div class="row g-3 mt-3">
+                <div class="col-6">
+                  <label for="logradouro" class="form-label">Logradouro</label>
+                  <input type="text" class="form-control" id="logradouro" placeholder="Logradouro" value="" name="logradouro" required>
+                  <div class="invalid-feedback">
+                    Logradouro é obrigatório
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="numero" class="form-label">Número</label>
+                  <input type="text" class="form-control" id="numero" placeholder="Número" value="" name="numero" required>
+                  <div class="invalid-feedback">
+                    Número é obrigatório
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <label for="complemento" class="form-label">Complemento</label>
+                  <input type="text" class="form-control" id="complemento" placeholder="Complemento" value="" name="complemento">
+                </div>
+                <div class="col-6">
+                  <label for="cep" class="form-label">CEP</label>
+                  <input type="text" class="form-control" id="cep" placeholder="CEP" value="" name="cep" required>
+                  <div class="invalid-feedback">
+                    CEP é obrigatório
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="bairro" class="form-label">Bairro</label>
+                  <input type="text" class="form-control" id="bairro" placeholder="Bairro" value="" name="bairro" required>
+                  <div class="invalid-feedback">
+                    Bairro é obrigatório
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="municipio" class="form-label">Município</label>
+                  <input type="text" class="form-control" id="municipio" placeholder="Município" value="" name="municipio" required>
+                  <div class="invalid-feedback">
+                    Município é obrigatório
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="estado" class="form-label">Estado</label>
+                  <select name="estado" id="estado" class="form-select" required>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Estado é obrigatório
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="telefone" class="form-label">Telefone</label>
+                  <input type="text" class="form-control" id="telefone" placeholder="Telefone" value="" name="telefone" required>
+                  <div class="invalid-feedback">
+                    Telefone é obrigatório
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4">
+              <button class="w-100 btn btn-primary btn-lg" type="submit">Salvar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  </main>
+
+<script src=././public/js/jquery.min.js></script>
+<script src=././public/js/bootstrap.bundle.min.js></script>
+<script src=././public/js/notify.min.js></script>
+<script src=././public/js/form-validation.js></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  $(function () {
+
+    document.getElementById("formCadastro").addEventListener("submit", function(event){
+      event.preventDefault();
+      if (this.checkValidity()) {
+        $.ajax({
+          type: 'POST',
+          url: 'index.php?r=salvarInscricao',
+          data: $('#formCadastro').serialize(),
+          dataType: "json",
+          success: function (data) {
+            if (data.status) {
+              Swal.fire({
+                title: 'Cadastro realizado com sucesso',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  window.location.href = "index.php?r=Login";
+                }
+              })
+            } else {
+              $.notify(data.msg, "warning");
+            }
+          },
+          error: function (data) {
+            $.notify('Erro ao salvar cadastro', "warning");
+          }
+        });
+      }
+    });
+  });
+</script>
+  </body>
+</html>

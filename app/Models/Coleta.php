@@ -3,11 +3,10 @@
 namespace FacaOBem\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Coleta extends Model
 {
-    use SoftDeletes;
     /**
      * The attributes that should be mutated to dates.
      *
@@ -15,7 +14,7 @@ class Coleta extends Model
      */
     protected $table = 'coletas';
 	protected $primaryKey = 'idColeta';
-    protected $dates = ['deleted_at'];
+
     protected $fillable = [
         'situacao',
         'descricao',
@@ -24,4 +23,13 @@ class Coleta extends Model
         'data2',
         'turno2',
     ];
+
+    public static function buscarIdUsuario(string $idUsuario){
+        return Capsule::select("
+        SELECT idColeta, CONVERT(VARCHAR, created_at, 103) AS dataSolicitacao, descricao, 
+               CONVERT(VARCHAR, data1, 103) + ' - ' + CASE WHEN turno1 = 'M' THEN 'Manh&atilde' ELSE 'Tarde' END + ' ou ' +
+               CONVERT(VARCHAR, data2, 103) + ' - ' + CASE WHEN turno2 = 'M' THEN 'Manh&atilde' ELSE 'Tarde' END as datas
+        FROM coletas
+        WHERE idUsuario = ?", [$idUsuario]);
+    }
 }

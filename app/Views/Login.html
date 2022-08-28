@@ -20,6 +20,7 @@
     <!-- Custom styles for this template -->
     <link href="././public/css/headers.css" rel="stylesheet">
     <link href="././public/css/form-validation.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
 
@@ -38,7 +39,9 @@
           </ul>
 
           <div class="col-md-3 text-end">
-              <button type="button" onclick="history.back()" class="btn btn-outline-primary me-2">Voltar</button>
+            <a href="index.php">
+              <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
+            </a>
           </div>
         </header>
       </div>
@@ -46,7 +49,7 @@
         <div class="row">
           <div class="col-md-8">
             <h4 class="mb-3">Login</h4>
-            <form class="needs-validation" novalidate id="formLogin" name="formLogin">
+            <form class="needs-validation" redirect="<?php echo $_GET['redirect'] ?>" novalidate id="formLogin" name="formLogin">
               <div class="row g-3">
                 <div class="col-12">
                   <label for="email" class="form-label">E-mail</label>
@@ -66,6 +69,7 @@
               <hr class="my-4">
               <button class="w-100 btn btn-primary btn-lg" type="submit">Entrar</button>
             </form>
+            <a href="index.php?r=Inscricao" >Cadastre-se</a>
           </div>
         </div>
       </div>
@@ -78,52 +82,36 @@
 <script src=././public/js/notify.min.js></script>
 <script src=././public/js/form-validation.js></script>
 <script>
-  $(function () {
+  $().ready(function () {
 
     document.getElementById("formLogin").addEventListener("submit", function(event){
       event.preventDefault();
-      $.ajax({
-        type: 'POST',
-        url: 'index.php?r=VerificarLogin&email=' + $('#email').val() + '&senha=' + $('#senha').val(),
-        data: $('#formLogin').serialize(),
-        dataType: "json",
-        success: function (data) {
-          if (data.status) {
-            window.location.href = "index.php";
-          } else {
-            $.notify(data.msg, "warning");
+
+      if (this.checkValidity()) {
+        $.ajax({
+          type: 'POST',
+          url: 'index.php?r=VerificarLogin&email=' + $('#email').val() + '&senha=' + $('#senha').val() + '&redirect=' + $('#formLogin').attr('redirect'),
+          data: $('#formLogin').serialize(),
+          dataType: "json",
+          success: function (data) {
+            if (data.status) {
+              if(data.redirect == 'coleta'){
+                window.location.href = "index.php?r=Coleta";
+              } else if (data.redirect == 'ponto'){
+                window.location.href = "index.php?r=Ponto";
+              } else {
+                window.location.href = "index.php";
+              }
+            } else {
+              $.notify(data.msg, "warning");
+            }
+          },
+          error: function (data) {
+            $.notify('Erro ao realizar login', "warning");
           }
-        },
-        error: function (data) {
-          $.notify('Erro ao realizar login', "warning");
-        }
-      });
-
-    });
-/*
-    $("#formLogin").validate({
-      rules: {
-        email: {
-          required: true,
-        },
-        senha: {
-          required: true,
-        }
-      },
-      messages: {
-        email: {
-          required: "Preencha o e-mail",
-        },
-        senha: {
-          required: "Preencha a senha",
-        },
-      },
-      submitHandler: function (form) {
-
+        });
       }
     });
-
- */
   });
 </script>
   </body>

@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+      <meta charset="iso-8859-1"/>
+      <title>Faça o Bem - Ajude Alguém - Coleta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Augusto Lumi">
+
+      <link href="././public/css/bootstrap.min.css" rel="stylesheet">
+      <link href="././public/css/datatables.min.css" rel="stylesheet">
+      <link href="././public/css/form-validation.css" rel="stylesheet">
+
+    <style>
+    </style>
+    <!-- Custom styles for this template -->
+      <link href="././public/css/headers.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+
+<main>
+    <h1 class="visually-hidden">Ajude Alguém</h1>
+
+      <div style="background-color: rgba(204,204,204,255);" >
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
+          </div>
+
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <h1>Ajude Alguém - Faça o Bem</h1>
+          </ul>
+
+          <div class="col-md-3 text-end">
+              <a href="index.php">
+                  <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button></a>
+
+              <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
+              echo FacaOBem\Helpers\Session::get('nome');
+            ?>
+              | <a href="././index.php?r=Sair">
+              Sair
+          </a>
+              <?php }?>
+          </div>
+        </header>
+      </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h4 class="mb-3">Quero agendar uma coleta em meu domicílio</h4>
+                <form class="needs-validation" novalidate id="formColeta" name="formColeta">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="descricao" class="form-label">Comente o que você possui para doação</label>
+                            <textarea class="form-control" id="descricao" placeholder="" value="" name="descricao" required></textarea>
+                            <div class="invalid-feedback">
+                                Comentário é obrigatório
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="data1" class="form-label">Selecione duas opções de data e turno para a coleta</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="date" class="form-control" id="data1" placeholder="  /  /    " value="" name="data1" required>
+                                    <div class="invalid-feedback">
+                                        Data é obrigatória
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <select class="form-select" id="turno1" name="turno1" required>
+                                        <option value="M">Manhã</option>
+                                        <option value="T">Tarde</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Turno é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <input type="date" class="form-control" id="data2" placeholder="  /  /    " value="" name="data2" required>
+                                    <div class="invalid-feedback">
+                                        Data é obrigatória
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <select class="form-select" id="turno2" name="turno2" required>
+                                        <option value="M">Manhã</option>
+                                        <option value="T">Tarde</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Turno é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button class="w-100 btn btn-primary btn-lg" type="submit">Solicitar coleta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-4 mb-3">
+            <h4>Minhas solicitações</h4><hr>
+        </div>
+        <div class="col-12" id="lista-instituicoes">
+            <table id="tabelaColeta" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Data da solicitação</th>
+                    <th>Comentário</th>
+                    <th>Opções de datas</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container px-4 py-5" id="custom-cards">
+    <div class="row">
+      <div class="col-6">
+        <a href="././index.php?r=ConsultarInstituicoes">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Encontre um ponto de doação próximo a você</h2>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-6">
+        <a href="././index.php?r=Ponto">
+          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Quero me tornar um ponto de doação</h2>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+</div>
+    <div class="modal" id="modalEdicao" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form idColeta="" class="needs-validation" novalidate id="formColeta-edicao" name="formColeta-edicao">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <label for="descricao-edicao" class="form-label">Comente o que você possui para doação</label>
+                            <textarea class="form-control" id="descricao-edicao" placeholder="" value="" name="descricao-edicao" required></textarea>
+                            <div class="invalid-feedback">
+                                Comentário é obrigatório
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="data1" class="form-label">Selecione duas opções de data e turno para a coleta</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="date" class="form-control" id="data1-edicao" placeholder="  /  /    " value="" name="data1-edicao" required>
+                                    <div class="invalid-feedback">
+                                        Data é obrigatória
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <select class="form-select" id="turno1-edicao" name="turno1-edicao" required>
+                                        <option value="M">Manhã</option>
+                                        <option value="T">Tarde</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Turno é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <input type="date" class="form-control" id="data2-edicao" placeholder="  /  /    " value="" name="data2-edicao" required>
+                                    <div class="invalid-feedback">
+                                        Data é obrigatória
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <select class="form-select" id="turno2-edicao" name="turno2-edicao" required>
+                                        <option value="M">Manhã</option>
+                                        <option value="T">Tarde</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Turno é obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src=././public/js/jquery.min.js></script>
+<script src=././public/js/bootstrap.bundle.min.js></script>
+<script src=././public/js/notify.min.js></script>
+<script src=././public/js/datatables.min.js></script>
+<script src=././public/js/form-validation.js></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+    function editar(id){
+        $.ajax({
+            type: "GET",
+            url: 'index.php?r=buscarColeta&idColeta=' + id,
+            dataType: "json",
+            success: function(data) {
+                $('#situacao-edicao').html(data.situacao);
+                $('#idUsuario-edicao').html(data.idUsuario);
+                $('#descricao-edicao').html(data.descricao);
+                $('#data1-edicao').val(data.data1);
+                $('#data2-edicao').val(data.data2);
+                $('#turno1-edicao').val(data.turno1);
+                $('#turno2-edicao').val(data.turno2);
+                $("#formColeta-edicao").attr('idColeta', data.idColeta);
+                $('#modalEdicao').modal('show');
+            },
+            error : function(data) {
+                $.notify('Erro ao carregar a edição', "warning");
+            }
+        });
+    }
+
+    function deletar(id){
+        Swal.fire({
+            text: "Você tem certeza que deseja deletar o registro?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sim, deletar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "GET",
+                    url: 'index.php?r=excluirColeta&idColeta=' + id,
+                    dataType: "json",
+                    success: function(data) {
+                        $('#tabelaColeta').DataTable().ajax.reload();
+                        if (data.status){
+                            $.notify('Exclusão concluída', "success");
+                        } else {
+                            $.notify('Erro ao excluir solicitação de coleta', "warning");
+                        }
+                    },
+                    error : function(data) {
+                        $.notify('Erro ao excluir solicitação de coleta', "warning");
+                    }
+                });
+            }
+        })
+    }
+
+$().ready(function () {
+
+    document.getElementById("formColeta").addEventListener("submit", function(event){
+        event.preventDefault();
+        if (this.checkValidity()) {
+            $.ajax({
+                type: 'POST',
+                url: 'index.php?r=salvarColeta',
+                data: $('#formColeta').serialize(),
+                dataType: "json",
+                success: function (data) {
+                    if (data.status) {
+                        $.notify(data.msg, "success");
+                        $('#tabelaColeta').DataTable().ajax.reload();
+                    } else {
+                        $.notify(data.msg, "warning");
+                    }
+                },
+                error: function (data) {
+                    $.notify('Erro ao solicitar coleta', "warning");
+                }
+            });
+        }
+    });
+
+    document.getElementById("formColeta-edicao").addEventListener("submit", function(event){
+        event.preventDefault();
+        if (this.checkValidity()) {
+            $.ajax({
+                type: 'POST',
+                url: 'index.php?r=atualizarColeta&idColeta=' + $('#formColeta-edicao').attr('idColeta'),
+                data: $('#formColeta-edicao').serialize(),
+                dataType: "json",
+                success: function (data) {
+                    if (data.status) {
+                        $.notify('Solicitação atualizada com sucesso', "success");
+                        $('#tabelaColeta').DataTable().ajax.reload();
+                        $('#modalEdicao').modal('hide');
+                    } else {
+                        $.notify('Erro ao atualizar solicitação de coleta', "warning");
+                    }
+                },
+                error: function (data) {
+                    $.notify('Erro ao atualizar solicitação de coleta', "warning");
+                }
+            });
+        }
+    });
+
+    $('#tabelaColeta').DataTable({
+        ajax: {url: 'index.php?r=carregarColeta', dataSrc:''},
+        columns: [
+            { data: 'dataSolicitacao' },
+            { data: 'descricao' },
+            { data: 'datas' },
+            { data: null, render: function(data,type,row){
+                    return '' +
+                        '<span class="text-nowrap">' +
+                        '<span onclick="editar(' + data.idColeta + ')" class="btn"><i class="fas fa-edit text-success"></i></span>' +
+                        '<span onclick="deletar(' + data.idColeta + ')" class="btn"><i class="fas fa-trash-alt text-danger"></i></span>' +
+                        '</span>';
+                }
+            },
+        ],
+    });
+
+});
+</script>
+  </body>
+</html>
