@@ -12,8 +12,17 @@
       <link href="././public/css/datatables.min.css" rel="stylesheet">
       <link href="././public/css/form-validation.css" rel="stylesheet">
 
-    <style>
-    </style>
+      <style>
+          .bi {
+              vertical-align: -.125em;
+              fill: currentColor;
+          }
+
+          h5, .nolink, .nolink:active, .nolink:visited, .nolik  {
+              text-decoration: none;
+              color: black;
+          }
+      </style>
     <!-- Custom styles for this template -->
       <link href="././public/css/headers.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -23,7 +32,7 @@
 <main>
     <h1 class="visually-hidden">Ajude Alguém</h1>
 
-      <div style="background-color: rgba(204,204,204,255);" >
+      <div style="background-color: #a2c4c9" >
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
           <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
             <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
@@ -134,20 +143,22 @@
 <div class="container px-4 py-5" id="custom-cards">
     <div class="row">
       <div class="col-6">
-        <a href="././index.php?r=ConsultarInstituicoes">
+        <a class="nolink" href="././index.php?r=ConsultarInstituicoes">
         <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Encontre um ponto de doação próximo a você</h2>
+            <div class="p-5 pb-3 text-center">
+                <img src="././public/images/local.png" height="110" width="110" alt="Encontre um ponto de doação próximo a você" />
+                <h5 class="pt-0 mt-4 mb-2">Encontre um ponto de doação próximo a você</h5>
             </div>
           </div>
         </a>
       </div>
 
       <div class="col-6">
-        <a href="././index.php?r=Ponto">
+        <a class="nolink" href="././index.php?r=Ponto">
           <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Quero me tornar um ponto de doação</h2>
+            <div class="p-5 pb-3 text-center">
+                <img src="././public/images/CadastroRede.png" height="110" width="128" alt="Quero me tornar um ponto de doação" />
+                <h5 class="pt-0 mt-4 mb-2">Quero me tornar um ponto de doação</h5>
             </div>
           </div>
         </a>

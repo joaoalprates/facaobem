@@ -15,6 +15,11 @@
         vertical-align: -.125em;
         fill: currentColor;
       }
+
+      h5, .nolink, .nolink:active, .nolink:visited, .nolik  {
+        text-decoration: none;
+        color: black;
+      }
     </style>
 
     
@@ -28,7 +33,7 @@
 <main>
   <h1 class="visually-hidden">Ajude Alguém</h1>
 
-  <div style="background-color: rgba(204,204,204,255);" >
+  <div style="background-color: #a2c4c9" >
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
@@ -53,37 +58,43 @@
         <?php }?>
       </div>
     </header>
-    <p class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">Este site é parte de um projeto de apoio para pessoas em vulnerabilidade economica e social que necessitam de doações de roupas e alimentos</p>
-  </div>
+    </div>
     
   <div class="container px-4 py-5" id="custom-cards">
-
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4>Este site é parte de um projeto de apoio para pessoas em vulnerabilidade economica e social que necessitam de doações de roupas e alimentos</h4>
+      </div>
+    </div>
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
       <div class="col">
-        <a href="././index.php?r=ConsultarInstituicoes">
-          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-             <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Encontre um ponto de doação próximo a você</h2>
+        <a class="nolink" href="././index.php?r=ConsultarInstituicoes">
+          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: #eff2f2">
+            <div class="p-5 pb-3 text-center">
+              <img src="././public/images/local.png" height="110" width="110" alt="Encontre um ponto de doação próximo a você" />
+              <h5 class="pt-0 mt-4 mb-2">Encontre um ponto de doação próximo a você</h5>
             </div>
           </div>
         </a>
       </div>
 
       <div class="col">
-        <a href="././index.php?r=Coleta">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Quero agendar uma coleta em meu domicílio</h2>
+        <a class="nolink" href="././index.php?r=Coleta">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: #eff2f2">
+            <div class="p-5 pb-3 text-center">
+              <img src="././public/images/ColetaDoação.png" height="117" width="110" alt="Quero agendar uma coleta em meu domicílio" />
+              <h5 class="pt-0 mt-4 mb-2">Quero agendar uma coleta em meu domicílio</h5>
             </div>
           </div>
         </a>
       </div>
 
       <div class="col">
-        <a href="././index.php?r=Ponto">
-          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Quero me tornar um ponto de doação</h2>
+        <a class="nolink" href="././index.php?r=Ponto">
+          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: #eff2f2">
+            <div class="p-5 pb-3 text-center">
+              <img src="././public/images/CadastroRede.png" height="110" width="128" alt="Quero me tornar um ponto de doação" />
+              <h5 class="pt-0 mt-4 mb-2">Quero me tornar um ponto de doação</h5>
             </div>
           </div>
         </a>
