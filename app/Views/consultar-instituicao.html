@@ -68,18 +68,17 @@
             float: left;
             width: 50%;
         }
+        h5, .nolink, .nolink:active, .nolink:visited, .nolik  {
+            text-decoration: none;
+            color: black;
+        }
     </style>
     <!-- Custom styles for this template -->
       <link href="././public/css/headers.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   </head>
   <body>
-    
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  <symbol id="bootstrap" viewBox="0 0 118 94">
-    <title>Bootstrap</title>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
-  </symbol>
-</svg>
 
 <main>
   <h1 class="visually-hidden">Ajude Alguém</h1>
@@ -105,33 +104,41 @@
           <?php }?>
       </div>
     </header>
-    <p class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">Enconte um ponto de coleta perto de você!</p>
   </div>
     
 <div class="container px-4 py-5" id="search-fields">
-    <div id = "firstbox" >
-        <p>Estado:</p>
-    </div>
-    <div id = "secondbox" >
-        <select name="estado" id="estado">
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="RJ">Rio de Janeiro</option>
-        </select>
-    </div>
-    <div id = "thirdbox" >
-        <p>Município:</p>
-    </div>
-    <div id = "fourthbox" >
-        <input type="text" name="municipio" id="municipio">
-    </div>
-    <div id = "fifthbox" >
-        <button type="button" id="pesquisar" name="pesquisar" class="btn btn-outline-primary me-2">Pesquisar</button>
-    </div>
-</div>
-
     <div class="row">
+        <div class="col-12">
+            <h3>Enconte um ponto de coleta perto de você!</h3>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 d-inline-flex">
+            <div class="col-1 pt-2 m-2">
+                <label for="estado" class="form-label d-inline-block">Estado</label>
+            </div>
+            <div class="col-2 m-2">
+                <select name="estado" id="estado" class="form-select d-inline-block">
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                </select>
+            </div>
+            <div class="col-1 pt-2 m-2">
+                <label for="municipio">Município</label>
+            </div>
+            <div class="col-6 m-2">
+                <input type="text" name="municipio" id="municipio" class="form-control" />
+            </div>
+            <div class="col-1 m-2">
+                <button type="button" id="pesquisar" name="pesquisar" class="btn btn-primary w-100"><i class="fa-solid fa-search"></i> Buscar</button>
+            </div>
+        </div>
+    </div>
+<hr>
+
+    <div class="row mt-5">
         <div class="col" id="lista-instituicoes">
             <table id="locais" class="display" style="width:100%">
                 <thead>
@@ -149,28 +156,32 @@
             </table>
         </div>
     </div>
+</div>
 
-<div class="container px-4 py-5" id="custom-cards">
-
-      <div class="col" id = "firstHalf">
-        <a href="">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Agende uma coleta em domicílio</h2>
+    <div class="container px-4 py-5" id="custom-cards">
+        <div class="row">
+            <div class="col-6">
+                <a class="nolink" href="././index.php?r=Coleta">
+                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
+                        <div class="p-5 pb-3 text-center">
+                            <img src="././public/images/ColetaDoação.png" height="117" width="110" alt="Quero agendar uma coleta em meu domicílio" />
+                            <h5 class="pt-0 mt-4 mb-2">Quero agendar uma coleta em meu domicílio</h5>
+                        </div>
+                    </div>
+                </a>
             </div>
-          </div>
-        </a>
-      </div>
 
-      <div class="col" id = "secondHalf">
-        <a href="">
-          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Se torne um ponto de doação</h2>
+            <div class="col-6">
+                <a class="nolink" href="././index.php?r=Ponto">
+                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
+                        <div class="p-5 pb-3 text-center">
+                            <img src="././public/images/CadastroRede.png" height="110" width="128" alt="Quero me tornar um ponto de doação" />
+                            <h5 class="pt-0 mt-4 mb-2">Quero me tornar um ponto de doação</h5>
+                        </div>
+                    </div>
+                </a>
             </div>
-          </div>
-        </a>
-      </div>
+        </div>
     </div>
 
 </main>
