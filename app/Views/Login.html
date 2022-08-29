@@ -47,7 +47,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-8 offset-md-2">
             <h4 class="mb-3">Login</h4>
             <form class="needs-validation" redirect="<?php echo $_GET['redirect'] ?>" novalidate id="formLogin" name="formLogin">
               <div class="row g-3">
@@ -65,11 +65,15 @@
                     E-mail é obrigatório
                   </div>
                 </div>
+                <div class="col-12 text-center">
+                  <hr class="my-4">
+                  <button class="w-100 btn btn-primary btn-lg mb-3" type="submit">Entrar</button>
+                  <a href="index.php?r=Inscricao" >Cadastre-se</a>
+                </div>
               </div>
-              <hr class="my-4">
-              <button class="w-100 btn btn-primary btn-lg" type="submit">Entrar</button>
+
             </form>
-            <a href="index.php?r=Inscricao" >Cadastre-se</a>
+
           </div>
         </div>
       </div>
