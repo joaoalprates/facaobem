@@ -43,22 +43,33 @@
         <h1>Ajude Alguém - Faça o Bem</h1>
       </ul>
 
-      <div class="col-md-3 text-end">
-        <?php if(!array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){ ?>
-        <a href="././index.php?r=Login">
-          <button type="button" class="btn btn-outline-primary me-2"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
-        </a>
-        <?php } else {
-          echo FacaOBem\Helpers\Session::get('nome');
-        ?>
+      <div class="col-md-2 text-end d-inline-block" >
 
-        | <a href="././index.php?r=Sair">
-          Sair
-        </a>
-        <?php }?>
+        <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
+
+            ?>
+
+        <div class="dropdown d-block  float-end me-2">
+          <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item disabled" href="#"><?php echo FacaOBem\Helpers\Session::get('nome');?></a></li>
+            <li><a class="dropdown-item" href="././index.php?r=EditarPerfil">Editar perfil</a></li>
+            <li><a class="dropdown-item" href="././index.php?r=EncerrarConta">Encerrar a conta</a></li>
+            <li><a class="dropdown-item" href="././index.php?r=Sair">Sair</a></li>
+          </ul>
+        </div>
+        <?php } else {?>
+        <div class="d-flex text-end d-block float-end">
+          <a href="././index.php?r=Login">
+            <button type="button" class="btn btn-outline-primary me-2"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
+          </a>
+        </div>
+        <?php } ?>
       </div>
     </header>
-    </div>
+  </div>
     
   <div class="container px-4 py-5" id="custom-cards">
     <div class="row">
@@ -103,4 +114,7 @@
   </div>
 
 </main>
+<script src=././public/js/jquery.min.js></script>
+<script src=././public/js/bootstrap.bundle.min.js></script>
+  </body>
 </html>

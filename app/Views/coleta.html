@@ -32,39 +32,42 @@
 <main>
     <h1 class="visually-hidden">Ajude Alguém</h1>
 
-      <div style="background-color: #a2c4c9" >
+    <div style="background-color: #a2c4c9" >
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-          <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
-          </div>
+            <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
+            </div>
 
-          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <h1>Ajude Alguém - Faça o Bem</h1>
-          </ul>
-                
-              <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <h1>Ajude Alguém - Faça o Bem</h1>
+            </ul>
+
+            <div class="col-md-2 text-end d-inline-block" >
+                <div class="d-flex text-end d-block float-end">
+                    <a href="index.php">
+                        <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
+                    </a>
+                </div>
+                <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
 
             ?>
 
-              <div class="dropdown col-md-1 text-end">
-                  <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="fas fa-user"></i>
-                  </button>
-                  <ul class="dropdown-menu">
-                      <li><a class="dropdown-item disabled" href="#"><?php echo FacaOBem\Helpers\Session::get('nome');?></a></li>
-                      <li><a class="dropdown-item" href="#">Editar perfil</a></li>
-                      <li><a class="dropdown-item" href="#">Encerrar a conta</a></li>
-                      <li><a class="dropdown-item" href="././index.php?r=Sair">Sair</a></li>
-                  </ul>
-              </div>
-              <?php }?>
-            <div class="col-md-1 text-end">
-                <a href="index.php">
-                    <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
-                </a>
+                <div class="dropdown d-block  float-end me-2">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item disabled" href="#"><?php echo FacaOBem\Helpers\Session::get('nome');?></a></li>
+                        <li><a class="dropdown-item" href="././index.php?r=EditarPerfil">Editar perfil</a></li>
+                        <li><a class="dropdown-item" href="././index.php?r=EncerrarConta">Encerrar a conta</a></li>
+                        <li><a class="dropdown-item" href="././index.php?r=Sair">Sair</a></li>
+                    </ul>
+                </div>
+                <?php }?>
+
             </div>
         </header>
-      </div>
+    </div>
 
     <div class="container">
         <div class="row">
