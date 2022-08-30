@@ -23,7 +23,7 @@ class ColetaController
                 $coleta->save();
                 echo json_encode(array('status' => true, 'msg' => ''));
             } catch (\Exception $e) {
-                echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar solicitaÁ„o de coleta'));
+                echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar solicita√ß√£o de coleta'));
             }
         } else {
             echo json_encode(array('status' => false, 'msg' => 'Erro ao solicitar coleta'));
@@ -43,7 +43,7 @@ class ColetaController
             echo json_encode(array('status' => true, 'msg' => ''));
 
         } catch (\Exception $e) {
-            echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar solicitaÁ„o de coleta'));
+            echo json_encode(array('status' => false, 'msg' => 'Erro ao excluir solicita√ß√£o de coleta'));
         }
     }
 

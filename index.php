@@ -30,9 +30,15 @@ switch ($route) {
         InstituicaoController::buscarInstituicoes($_GET['estado'], $_GET['municipio']);
         break;
     case 'Login':
+        if(array_key_exists('idUsuario', Session::getAll())) {
+            header("Location: $base_url");
+        }
         LoginController::index();
         break;
     case 'Inscricao':
+        if(array_key_exists('idUsuario', Session::getAll())) {
+            header("Location: $base_url");
+        }
         LoginController::inscricao();
         break;
     case 'salvarInscricao':
@@ -85,5 +91,17 @@ switch ($route) {
         break;
     case 'atualizarPonto':
         PontoController::update($_POST, $_GET['idPonto']);
+        break;
+    case 'EditarPerfil':
+        if(!array_key_exists('idUsuario', Session::getAll())) {
+            header("Location: $base_url?r=Login");
+        }
+        LoginController::edicao();
+        break;
+    case 'SalvarPerfil':
+        LoginController::update($_POST);
+        break;
+    case 'EncerrarConta':
+        LoginController::delete();
         break;
 }

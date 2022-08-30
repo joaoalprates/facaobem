@@ -39,43 +39,62 @@
             <h1>Ajude Alguém - Faça o Bem</h1>
           </ul>
 
-          <div class="col-md-2 text-end">
-            <a href="index.php">
-              <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
-            </a>
+          <div class="col-md-2 text-end d-inline-block" >
+            <div class="d-flex text-end d-block float-end">
+              <a href="index.php">
+                <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
+              </a>
+            </div>
+            <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
+
+            ?>
+
+            <div class="dropdown d-block  float-end me-2">
+              <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item disabled" href="#"><?php echo FacaOBem\Helpers\Session::get('nome');?></a></li>
+                <li><a class="dropdown-item" href="././index.php?r=EditarPerfil">Editar perfil</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0);" onclick="encerrarConta()">Encerrar a conta</a></li>
+                <li><a class="dropdown-item" href="././index.php?r=Sair">Sair</a></li>
+              </ul>
+            </div>
+            <?php }?>
+
           </div>
         </header>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-md-8 offset-md-2">
-            <h4 class="mb-3">Cadastre-se</h4>
+            <h4 class="mb-3">Editar perfil</h4>
             <form class="needs-validation" novalidate id="formCadastro" name="formCadastro">
               <div class="row g-3">
                 <div class="col-6">
                   <label for="nome" class="form-label">Nome</label>
-                  <input type="text" class="form-control" id="nome" placeholder="Nome" value="" name="nome" required>
+                  <input type="text" class="form-control" id="nome" placeholder="Nome" value="<?php echo $usuario->nome ;?>" name="nome" required>
                   <div class="invalid-feedback">
                     Nome é obrigatório
                   </div>
                 </div>
                 <div class="col-6">
                   <label for="email" class="form-label">E-mail</label>
-                  <input type="email" class="form-control" id="email" placeholder="E-mail" value="" name="email" required>
+                  <input type="email" class="form-control" id="email" placeholder="E-mail" value="<?php echo $usuario->email ;?>" name="email" required>
                   <div class="invalid-feedback">
                     E-mail é obrigatório
                   </div>
                 </div>
                 <div class="col-6">
                   <label for="cpf" class="form-label">CPF</label>
-                  <input type="text" class="form-control" id="cpf" placeholder="CPF" value="" name="cpf" required>
+                  <input type="text" class="form-control" id="cpf" placeholder="CPF" value="<?php echo $usuario->cpf ;?>" name="cpf" required>
                   <div class="invalid-feedback">
                     CPF é obrigatório
                   </div>
                 </div>
                 <div class="col-6">
                   <label for="senha" class="form-label">Senha</label>
-                  <input type="password" class="form-control" id="senha" placeholder="" value="" name="senha" required>
+                  <input type="password" class="form-control" id="senha" placeholder="" value="<?php echo $usuario->senha ;?>" name="senha" required>
                   <div class="invalid-feedback">
                     E-mail é obrigatório
                   </div>
@@ -84,14 +103,14 @@
               <div class="row g-3 mt-3">
                 <div class="col-6">
                   <label for="logradouro" class="form-label">Logradouro</label>
-                  <input type="text" class="form-control" id="logradouro" placeholder="Logradouro" value="" name="logradouro" required>
+                  <input type="text" class="form-control" id="logradouro" placeholder="Logradouro" value="<?php echo $usuario->logradouro ;?>" name="logradouro" required>
                   <div class="invalid-feedback">
                     Logradouro é obrigatório
                   </div>
                 </div>
                 <div class="col-6">
                   <label for="numero" class="form-label">Número</label>
-                  <input type="text" class="form-control" id="numero" placeholder="Número" value="" name="numero" required>
+                  <input type="text" class="form-control" id="numero" placeholder="Número" value="<?php echo $usuario->numero ;?>" name="numero" required>
                   <div class="invalid-feedback">
                     Número é obrigatório
                   </div>
@@ -99,25 +118,25 @@
 
                 <div class="col-6">
                   <label for="complemento" class="form-label">Complemento</label>
-                  <input type="text" class="form-control" id="complemento" placeholder="Complemento" value="" name="complemento">
+                  <input type="text" class="form-control" id="complemento" placeholder="Complemento" value="<?php echo $usuario->complemento ;?>" name="complemento">
                 </div>
                 <div class="col-6">
                   <label for="cep" class="form-label">CEP</label>
-                  <input type="text" class="form-control" id="cep" placeholder="CEP" value="" name="cep" required>
+                  <input type="text" class="form-control" id="cep" placeholder="CEP" value="<?php echo $usuario->cep ;?>" name="cep" required>
                   <div class="invalid-feedback">
                     CEP é obrigatório
                   </div>
                 </div>
                 <div class="col-6">
                   <label for="bairro" class="form-label">Bairro</label>
-                  <input type="text" class="form-control" id="bairro" placeholder="Bairro" value="" name="bairro" required>
+                  <input type="text" class="form-control" id="bairro" placeholder="Bairro" value="<?php echo $usuario->bairro ;?>" name="bairro" required>
                   <div class="invalid-feedback">
                     Bairro é obrigatório
                   </div>
                 </div>
                 <div class="col-6">
                   <label for="municipio" class="form-label">Município</label>
-                  <input type="text" class="form-control" id="municipio" placeholder="Município" value="" name="municipio" required>
+                  <input type="text" class="form-control" id="municipio" placeholder="Município" value="<?php echo $usuario->municipio ;?>" name="municipio" required>
                   <div class="invalid-feedback">
                     Município é obrigatório
                   </div>
@@ -125,10 +144,10 @@
                 <div class="col-6">
                   <label for="estado" class="form-label">Estado</label>
                   <select name="estado" id="estado" class="form-select" required>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RS" <?php echo ($usuario->estado == 'RS' ? 'selected="selected"' : '') ;?>>Rio Grande do Sul</option>
+                    <option value="SC" <?php echo ($usuario->estado == 'SC' ? 'selected="selected"' : '') ;?>>Santa Catarina</option>
+                    <option value="SP" <?php echo ($usuario->estado == 'SP' ? 'selected="selected"' : '') ;?>>São Paulo</option>
+                    <option value="RJ" <?php echo ($usuario->estado == 'RJ' ? 'selected="selected"' : '') ;?>>Rio de Janeiro</option>
                   </select>
                   <div class="invalid-feedback">
                     Estado é obrigatório
@@ -136,7 +155,7 @@
                 </div>
                 <div class="col-6">
                   <label for="telefone" class="form-label">Telefone</label>
-                  <input type="text" class="form-control" id="telefone" placeholder="Telefone" value="" name="telefone" required>
+                  <input type="text" class="form-control" id="telefone" placeholder="Telefone" value="<?php echo $usuario->telefone ;?>" name="telefone" required>
                   <div class="invalid-feedback">
                     Telefone é obrigatório
                   </div>
@@ -156,7 +175,6 @@
 <script src=././public/js/form-validation.js></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-
   $(function () {
 
     document.getElementById("formCadastro").addEventListener("submit", function(event){
@@ -164,20 +182,20 @@
       if (this.checkValidity()) {
         $.ajax({
           type: 'POST',
-          url: 'index.php?r=salvarInscricao',
+          url: 'index.php?r=SalvarPerfil',
           data: $('#formCadastro').serialize(),
           dataType: "json",
           success: function (data) {
             if (data.status) {
               Swal.fire({
-                title: 'Cadastro realizado com sucesso',
+                title: 'Edição realizada com sucesso',
                 showDenyButton: false,
                 showCancelButton: false,
                 confirmButtonText: 'OK',
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                  window.location.href = "index.php?r=Login";
+                  window.location.href = "index.php";
                 }
               })
             } else {
@@ -185,7 +203,7 @@
             }
           },
           error: function (data) {
-            $.notify('Erro ao salvar cadastro', "warning");
+            $.notify('Erro ao salvar perfil', "warning");
           }
         });
       }

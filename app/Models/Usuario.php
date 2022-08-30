@@ -4,11 +4,9 @@ namespace FacaOBem\Models;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Usuario extends Model
 {
-    use SoftDeletes;
     /**
      * The attributes that should be mutated to dates.
      *
@@ -16,7 +14,6 @@ class Usuario extends Model
      */
     protected $table = 'usuarios';
 	protected $primaryKey = 'idUsuario';
-    protected $dates = ['deleted_at'];
     protected $fillable = [
         'nome',
         'email',
