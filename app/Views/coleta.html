@@ -130,7 +130,7 @@
         </div>
     </div>
 
-<div class="container">
+<div class="container-xl">
     <div class="row">
         <div class="col-12 mt-4 mb-3">
             <h4>Minhas solicitações</h4><hr>
@@ -142,6 +142,7 @@
                     <th>Data da solicitação</th>
                     <th>Comentário</th>
                     <th>Opções de datas</th>
+                    <th>Situação</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
@@ -240,6 +241,48 @@
         </div>
     </div>
 
+    <div class="modal" id="modalVisualizacao" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Visualizar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <label for="descricao-edicao" class="form-label"><b>Comente o que você possui para doação</b></label>
+                        <div id="descricao-visualizacao"></div>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <label for="situacao-edicao" class="form-label"><b>Situação</b></label>
+                        <div id="situacao-visualizacao"></div>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <label for="data1" class="form-label"><b>Data e turno para a coleta</b></label>
+                        <div class="row">
+                            <div class="col-6">
+                                <div id="data1-visualizacao"></div>
+                            </div>
+                            <div class="col-6">
+                                <div id="turno1-visualizacao"></div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <div id="data2-visualizacao"></div>
+                            </div>
+                            <div class="col-6">
+                                <div id="turno2-visualizacao"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
 <script src=././public/js/jquery.min.js></script>
@@ -257,8 +300,6 @@
             url: 'index.php?r=buscarColeta&idColeta=' + id,
             dataType: "json",
             success: function(data) {
-                $('#situacao-edicao').html(data.situacao);
-                $('#idUsuario-edicao').html(data.idUsuario);
                 $('#descricao-edicao').html(data.descricao);
                 $('#data1-edicao').val(data.data1);
                 $('#data2-edicao').val(data.data2);
@@ -269,6 +310,30 @@
             },
             error : function(data) {
                 $.notify('Erro ao carregar a edição', "warning");
+            }
+        });
+    }
+
+    function visualizar(id){
+        $.ajax({
+            type: "GET",
+            url: 'index.php?r=buscarColeta&idColeta=' + id,
+            dataType: "json",
+            success: function(data) {
+
+                var data1 = data.data1.split("-");
+                var data2 = data.data2.split("-");
+
+                $('#situacao-visualizacao').html((data.situacao == 1 ? 'Pendente' : 'Cadastrado'));
+                $('#descricao-visualizacao').html(data.descricao);
+                $('#data1-visualizacao').html(data1[2] + '/' + data1[1] + '/' + data1[0]);
+                $('#data2-visualizacao').html(data2[2] + '/' + data2[1] + '/' + data2[0]);
+                $('#turno1-visualizacao').html((data.turno1 == 'T' ? 'Tarde' : 'Manhã'));
+                $('#turno2-visualizacao').html((data.turno2 == 'T' ? 'Tarde' : 'Manhã'));
+                $('#modalVisualizacao').modal('show');
+            },
+            error : function(data) {
+                $.notify('Erro ao carregar a visualização', "warning");
             }
         });
     }
@@ -360,8 +425,13 @@ $().ready(function () {
             { data: 'descricao' },
             { data: 'datas' },
             { data: null, render: function(data,type,row){
+                    return (data.situacao == 1 ? 'Pendente' : 'Cadastrado');
+                }
+            },
+            { data: null, render: function(data,type,row){
                     return '' +
                         '<span class="text-nowrap">' +
+                        '<span onclick="visualizar(' + data.idColeta + ')" class="btn"><i class="fas fa-search text-success"></i></span>' +
                         '<span onclick="editar(' + data.idColeta + ')" class="btn"><i class="fas fa-edit text-success"></i></span>' +
                         '<span onclick="deletar(' + data.idColeta + ')" class="btn"><i class="fas fa-trash-alt text-danger"></i></span>' +
                         '</span>';
