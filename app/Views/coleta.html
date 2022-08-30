@@ -254,7 +254,7 @@
                         <div id="descricao-visualizacao"></div>
                     </div>
                     <div class="col-12 mt-2">
-                        <label for="situacao-edicao" class="form-label"><b>Situação</b></label>
+                        <label for="situacao-visualizacao" class="form-label"><b>Situação</b></label>
                         <div id="situacao-visualizacao"></div>
                     </div>
                     <div class="col-12 mt-2">
@@ -456,6 +456,9 @@ $().ready(function () {
 
     $('#tabelaColeta').DataTable({
         ajax: {url: 'index.php?r=carregarColeta', dataSrc:''},
+        "oLanguage": {
+            "sUrl": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+        },
         columns: [
             { data: 'dataSolicitacao' },
             { data: 'descricao' },
@@ -467,7 +470,7 @@ $().ready(function () {
             { data: null, render: function(data,type,row){
                     return '' +
                         '<span class="text-nowrap">' +
-                        '<span onclick="visualizar(' + data.idColeta + ')" class="btn"><i class="fas fa-search text-success"></i></span>' +
+                        '<span onclick="visualizar(' + data.idColeta + ')" class="btn"><i class="fas fa-search text-primary"></i></span>' +
                         '<span onclick="editar(' + data.idColeta + ')" class="btn"><i class="fas fa-edit text-success"></i></span>' +
                         '<span onclick="deletar(' + data.idColeta + ')" class="btn"><i class="fas fa-trash-alt text-danger"></i></span>' +
                         '</span>';

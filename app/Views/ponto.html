@@ -375,6 +375,9 @@ $().ready(function () {
 
     $('#tabelaColeta').DataTable({
         ajax: {url: 'index.php?r=carregarColeta', dataSrc:''},
+        "oLanguage": {
+            "sUrl": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+        },
         columns: [
             { data: 'dataSolicitacao' },
             { data: 'descricao' },

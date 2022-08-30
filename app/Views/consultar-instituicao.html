@@ -246,6 +246,9 @@
 $().ready(function () {
     $('#locais').DataTable({
         data: null,
+        "oLanguage": {
+            "sUrl": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+        },
         columns: [
             { data: 'nome' },
             { data: 'endereco' },
