@@ -21,7 +21,7 @@ class ColetaController
                 $coleta->setAttribute('idUsuario', Session::get('idUsuario'));
                 $coleta->setAttribute('situacao', 1);
                 $coleta->save();
-                echo json_encode(array('status' => true, 'msg' => ''));
+                echo json_encode(array('status' => true, 'msg' => 'Cadastro realizado com sucesso'));
             } catch (\Exception $e) {
                 echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar solicitação de coleta'));
             }
