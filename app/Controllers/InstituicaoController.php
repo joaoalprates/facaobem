@@ -2,7 +2,7 @@
 
 namespace FacaOBem\Controllers;
 
-use FacaOBem\Models\Instituicao;
+use FacaOBem\Services\InstituicaoService;
 
 class InstituicaoController
 {
@@ -11,16 +11,9 @@ class InstituicaoController
         require './app/Views/consultar-instituicao.html';
     }
 
-    public static function buscarInstituicoes($estado = '', $municipio = '')
+    public function buscarInstituicoes($estado = '', $municipio = '')
     {
-
-        if($estado != '' && $municipio != '')
-            $data = Instituicao::buscarInstituicoesEstadoMunicipio($estado, $municipio);
-        else if($estado != '' && $municipio == '')
-            $data = Instituicao::buscarInstituicoesEstado($estado);
-        else
-            $data = Instituicao::all();
-
-        echo json_encode($data);
+        $iService = InstituicaoService::getInstance();
+        echo $iService->buscarInstituicoes($estado, $municipio);
     }
 }
