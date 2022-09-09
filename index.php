@@ -73,7 +73,7 @@ switch ($route) {
         break;
     case 'Ponto':
         if(!array_key_exists('idUsuario', Session::getAll())) {
-            header("Location: $base_url?r=Login&redirect=coleta");
+            header("Location: $base_url?r=Login&redirect=ponto");
         }
         PontoController::index();
         break;
@@ -87,7 +87,7 @@ switch ($route) {
         PontoController::delete($_GET['idPonto']);
         break;
     case 'buscarPonto':
-        PontoController::buscar($_GET['idPonto']);
+        PontoController::buscar();
         break;
     case 'atualizarPonto':
         PontoController::update($_POST, $_GET['idPonto']);
@@ -103,5 +103,8 @@ switch ($route) {
         break;
     case 'EncerrarConta':
         LoginController::delete();
+        break;
+    case 'CarregarCnpj':
+        InstituicaoController::buscarCnpj();
         break;
 }

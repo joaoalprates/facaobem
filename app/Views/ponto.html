@@ -1,233 +1,209 @@
 <!doctype html>
 <html lang="en">
-  <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-      <meta charset="iso-8859-1"/>
-      <title>Faça o Bem - Ajude Alguém - Ponto de doação</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Augusto Lumi">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="iso-8859-1"/>
+  <title>Faça o Bem - Ajude Alguém - Ponto de doação</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Augusto Lumi">
 
-      <link href="././public/css/bootstrap.min.css" rel="stylesheet">
-      <link href="././public/css/datatables.min.css" rel="stylesheet">
-      <link href="././public/css/form-validation.css" rel="stylesheet">
+  <link href="././public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="././public/css/datatables.min.css" rel="stylesheet">
+  <link href="././public/css/form-validation.css" rel="stylesheet">
 
-    <style>
-    </style>
-    <!-- Custom styles for this template -->
-      <link href="././public/css/headers.css" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  </head>
-  <body>
+  <style>
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="././public/css/headers.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
 
 <main>
-    <h1 class="visually-hidden">Ajude Alguém</h1>
+  <h1 class="visually-hidden">Ajude Alguém</h1>
 
-    <div style="background-color: #a2c4c9" >
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
-                <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
-            </div>
+  <div style="background-color: #a2c4c9" >
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
+      </div>
 
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <h1>Ajude Alguém - Faça o Bem</h1>
-            </ul>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <h1>Ajude Alguém - Faça o Bem</h1>
+      </ul>
 
-            <div class="col-md-2 text-end d-inline-block" >
-                <div class="d-flex text-end d-block float-end">
-                    <a href="index.php">
-                        <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
-                    </a>
-                </div>
-                <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
+      <div class="col-md-2 text-end d-inline-block" >
+        <div class="d-flex text-end d-block float-end">
+          <a href="index.php">
+            <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
+          </a>
+        </div>
+        <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
 
             ?>
 
-                <div class="dropdown d-block  float-end me-2">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item disabled" href="#"><?php echo FacaOBem\Helpers\Session::get('nome');?></a></li>
-                        <li><a class="dropdown-item" href="././index.php?r=EditarPerfil">Editar perfil</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);" onclick="encerrarConta()">Encerrar a conta</a></li>
-                        <li><a class="dropdown-item" href="././index.php?r=Sair">Sair</a></li>
-                    </ul>
+        <div class="dropdown d-block  float-end me-2">
+          <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item disabled" href="#"><?php echo FacaOBem\Helpers\Session::get('nome');?></a></li>
+            <li><a class="dropdown-item" href="././index.php?r=EditarPerfil">Editar perfil</a></li>
+            <li><a class="dropdown-item" href="javascript:void(0);" onclick="encerrarConta()">Encerrar a conta</a></li>
+            <li><a class="dropdown-item" href="././index.php?r=Sair">Sair</a></li>
+          </ul>
+        </div>
+        <?php }?>
+
+      </div>
+    </header>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8  offset-md-2">
+        <h4 class="mb-3">Quero me tornar um ponto de doação</h4>
+        <form action="index.php?r=salvarPonto" class="needs-validation" novalidate id="formPonto" name="formPonto">
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="descricao" class="form-label">Conte um pouco sobre você e seus trabalhos sociais</label>
+              <textarea class="form-control" id="descricao" placeholder="" value="" name="descricao" required></textarea>
+              <div class="invalid-feedback">
+                Comentário é obrigatório
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="cnpj" class="form-label">CNPJ</label>
+              <input type="text" class="form-control" id="cnpj" placeholder="CNPJ" value="" name="cnpj" required>
+              <div class="invalid-feedback">
+                CNPJ é obrigatório
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="nome" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="nome" placeholder="Nome" value="" name="nome" required>
+              <div class="invalid-feedback">
+                Nome é obrigatório
+              </div>
+            </div>
+            <div class="row g-3 mt-3">
+              <div class="col-6">
+                <label for="logradouro" class="form-label">Logradouro</label>
+                <input type="text" class="form-control" id="logradouro" placeholder="Logradouro" value="" name="logradouro" required>
+                <div class="invalid-feedback">
+                  Logradouro é obrigatório
                 </div>
-                <?php }?>
+              </div>
+              <div class="col-6">
+                <label for="numero" class="form-label">Número</label>
+                <input type="text" class="form-control" id="numero" placeholder="Número" value="" name="numero" required>
+                <div class="invalid-feedback">
+                  Número é obrigatório
+                </div>
+              </div>
 
+              <div class="col-6">
+                <label for="complemento" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="complemento" placeholder="Complemento" value="" name="complemento">
+              </div>
+              <div class="col-6">
+                <label for="cep" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="cep" placeholder="CEP" value="" name="cep" required>
+                <div class="invalid-feedback">
+                  CEP é obrigatório
+                </div>
+              </div>
+              <div class="col-6">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="bairro" placeholder="Bairro" value="" name="bairro" required>
+                <div class="invalid-feedback">
+                  Bairro é obrigatório
+                </div>
+              </div>
+              <div class="col-6">
+                <label for="municipio" class="form-label">Município</label>
+                <input type="text" class="form-control" id="municipio" placeholder="Município" value="" name="municipio" required>
+                <div class="invalid-feedback">
+                  Município é obrigatório
+                </div>
+              </div>
+              <div class="col-6">
+                <label for="estado" class="form-label">Estado</label>
+                <select name="estado" id="estado" class="form-select" required>
+                  <option value="RS">Rio Grande do Sul</option>
+                  <option value="SC">Santa Catarina</option>
+                  <option value="SP">São Paulo</option>
+                  <option value="RJ">Rio de Janeiro</option>
+                </select>
+                <div class="invalid-feedback">
+                  Estado é obrigatório
+                </div>
+              </div>
+              <div class="col-6">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="telefone" placeholder="Telefone" value="" name="telefone" required>
+                <div class="invalid-feedback">
+                  Telefone é obrigatório
+                </div>
+              </div>
             </div>
-        </header>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h4 class="mb-3">Quero agendar uma coleta em meu domicílio</h4>
-                <form class="needs-validation" novalidate id="formColeta" name="formColeta">
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label for="descricao" class="form-label">Comente o que você possui para doação</label>
-                            <textarea class="form-control" id="descricao" placeholder="" value="" name="descricao" required></textarea>
-                            <div class="invalid-feedback">
-                                Comentário é obrigatório
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <label for="data1" class="form-label">Selecione duas opções de data e turno para a coleta</label>
-                            <div class="row">
-                                <div class="col-6">
-                                    <input type="date" class="form-control" id="data1" placeholder="  /  /    " value="" name="data1" required>
-                                    <div class="invalid-feedback">
-                                        Data é obrigatória
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <select class="form-select" id="turno1" name="turno1" required>
-                                        <option value="M">Manhã</option>
-                                        <option value="T">Tarde</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Turno é obrigatório
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <input type="date" class="form-control" id="data2" placeholder="  /  /    " value="" name="data2" required>
-                                    <div class="invalid-feedback">
-                                        Data é obrigatória
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <select class="form-select" id="turno2" name="turno2" required>
-                                        <option value="M">Manhã</option>
-                                        <option value="T">Tarde</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Turno é obrigatório
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <button class="w-100 btn btn-primary btn-lg" type="submit">Solicitar coleta</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12 mt-4 mb-3">
-            <h4>Minhas solicitações</h4><hr>
-        </div>
-        <div class="col-12" id="lista-instituicoes">
-            <table id="tabelaColeta" class="display" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Data da solicitação</th>
-                    <th>Comentário</th>
-                    <th>Opções de datas</th>
-                    <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<div class="container px-4 py-5" id="custom-cards">
-    <div class="row">
-      <div class="col-6">
-        <a href="././index.php?r=ConsultarInstituicoes">
-        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Encontre um ponto de doação próximo a você</h2>
-            </div>
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg btn-salvar" type="submit">Salvar</button>
           </div>
-        </a>
+        </form>
       </div>
+    </div>
+  </div>
 
+  <div class="container-xl">
+    <div class="row">
+      <div class="col-12 mt-4 mb-3">
+        <h4>Minhas solicitações</h4><hr>
+      </div>
+      <div class="col-12" id="lista-instituicoes">
+        <table id="tabelaPonto" class="display" style="width:100%">
+          <thead>
+          <tr>
+            <th>Data da solicitação</th>
+            <th>CNPJ</th>
+            <th>Nome</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="container px-4 py-5" id="custom-cards">
+    <div class="row">
       <div class="col-6">
-        <a href="././index.php?r=Ponto">
+        <a class="nolink" href="././index.php?r=ConsultarInstituicoes">
           <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Quero me tornar um ponto de doação</h2>
+            <div class="p-5 pb-3 text-center">
+              <img src="././public/images/local.png" height="110" width="110" alt="Encontre um ponto de doação próximo a você" />
+              <h5 class="pt-0 mt-4 mb-2">Encontre um ponto de doação próximo a você</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-6">
+        <a class="nolink" href="././index.php?r=Coleta">
+          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
+            <div class="p-5 pb-3 text-center">
+              <img src="././public/images/ColetaDoação.png" height="117" width="110" alt="Quero me tornar um ponto de doação" />
+              <h5 class="pt-0 mt-4 mb-2">Quero agendar uma coleta em meu domicílio</h5>
             </div>
           </div>
         </a>
       </div>
     </div>
-</div>
-    <div class="modal" id="modalEdicao" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form idColeta="" class="needs-validation" novalidate id="formColeta-edicao" name="formColeta-edicao">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="col-12">
-                            <label for="descricao-edicao" class="form-label">Comente o que você possui para doação</label>
-                            <textarea class="form-control" id="descricao-edicao" placeholder="" value="" name="descricao-edicao" required></textarea>
-                            <div class="invalid-feedback">
-                                Comentário é obrigatório
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <label for="data1" class="form-label">Selecione duas opções de data e turno para a coleta</label>
-                            <div class="row">
-                                <div class="col-6">
-                                    <input type="date" class="form-control" id="data1-edicao" placeholder="  /  /    " value="" name="data1-edicao" required>
-                                    <div class="invalid-feedback">
-                                        Data é obrigatória
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <select class="form-select" id="turno1-edicao" name="turno1-edicao" required>
-                                        <option value="M">Manhã</option>
-                                        <option value="T">Tarde</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Turno é obrigatório
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <input type="date" class="form-control" id="data2-edicao" placeholder="  /  /    " value="" name="data2-edicao" required>
-                                    <div class="invalid-feedback">
-                                        Data é obrigatória
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <select class="form-select" id="turno2-edicao" name="turno2-edicao" required>
-                                        <option value="M">Manhã</option>
-                                        <option value="T">Tarde</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Turno é obrigatório
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Atualizar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+  </div>
 
 </main>
 
@@ -239,161 +215,167 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    function encerrarConta(){
-        Swal.fire({
-            text: "Você tem certeza que deseja encerrar a conta?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc3545',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Sim, encerrar',
-            cancelButtonText: 'Cancelar',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "GET",
-                    url: 'index.php?r=EncerrarConta',
-                    dataType: "json",
-                    success: function(data) {
-                        Swal.fire({
-                            title: 'Conta encerrada com sucesso',
-                            showDenyButton: false,
-                            showCancelButton: false,
-                            confirmButtonText: 'OK',
-                        }).then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                                window.location.href = "index.php";
-                            }
-                        })
-                    },
-                    error : function(data) {
-                        $.notify('Erro ao encerrar conta', "warning");
-                    }
-                });
-            }
-        })
-    }
 
-    function editar(id){
-        $.ajax({
-            type: "GET",
-            url: 'index.php?r=buscarColeta&idColeta=' + id,
-            dataType: "json",
-            success: function(data) {
-                $('#situacao-edicao').html(data.situacao);
-                $('#idUsuario-edicao').html(data.idUsuario);
-                $('#descricao-edicao').html(data.descricao);
-                $('#data1-edicao').val(data.data1);
-                $('#data2-edicao').val(data.data2);
-                $('#turno1-edicao').val(data.turno1);
-                $('#turno2-edicao').val(data.turno2);
-                $("#formColeta-edicao").attr('idColeta', data.idColeta);
-                $('#modalEdicao').modal('show');
-            },
-            error : function(data) {
-                $.notify('Erro ao carregar a edição', "warning");
-            }
+  function carregarCnpj(){
+    $.ajax({
+      type: "GET",
+      url: 'index.php?r=CarregarCnpj',
+      dataType: "json",
+      success: function(data) {
+        $.each(data, function(i, item) {
+          $('#cnpj').append('<option value="' + item.cnpj + '">' + item.cnpj + '</option>');
         });
-    }
+      },
+      error : function(data) {
+        $.notify('Erro ao carregar cnpj', "warning");
+      }
+    });
+  }
 
-    function deletar(id){
-        Swal.fire({
-            text: "Você tem certeza que deseja deletar o registro?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc3545',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Sim, deletar',
-            cancelButtonText: 'Cancelar',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "GET",
-                    url: 'index.php?r=excluirColeta&idColeta=' + id,
-                    dataType: "json",
-                    success: function(data) {
-                        $('#tabelaColeta').DataTable().ajax.reload();
-                        if (data.status){
-                            $.notify('Exclusão concluída', "success");
-                        } else {
-                            $.notify('Erro ao excluir solicitação de coleta', "warning");
-                        }
-                    },
-                    error : function(data) {
-                        $.notify('Erro ao excluir solicitação de coleta', "warning");
-                    }
-                });
-            }
-        })
-    }
-
-$().ready(function () {
-
-    document.getElementById("formColeta").addEventListener("submit", function(event){
-        event.preventDefault();
+  function encerrarConta(){
+    Swal.fire({
+      text: "Você tem certeza que deseja encerrar a conta?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Sim, encerrar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
         $.ajax({
-            type: 'POST',
-            url: 'index.php?r=salvarColeta',
-            data: $('#formColeta').serialize(),
-            dataType: "json",
-            success: function (data) {
-                if (data.status) {
-                    $.notify(data.msg, "success");
-                    $('#tabelaColeta').DataTable().ajax.reload();
-                } else {
-                    $.notify(data.msg, "warning");
+          type: "GET",
+          url: 'index.php?r=EncerrarConta',
+          dataType: "json",
+          success: function(data) {
+            Swal.fire({
+              title: 'Conta encerrada com sucesso',
+              showDenyButton: false,
+              showCancelButton: false,
+              confirmButtonText: 'OK',
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                window.location.href = "index.php";
+              }
+            })
+          },
+          error : function(data) {
+            $.notify('Erro ao encerrar conta', "warning");
+          }
+        });
+      }
+    })
+  }
+
+  function deletar(id){
+    Swal.fire({
+      text: "Você tem certeza que deseja deletar o registro?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Sim, deletar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "GET",
+          url: 'index.php?r=excluirPonto&idPonto=' + id,
+          dataType: "json",
+          success: function(data) {
+            $('#tabelaPonto').DataTable().ajax.reload();
+            if (data.status){
+              Swal.fire({
+                title: 'Solicitação excluída com sucesso',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  window.location.href = "index.php?r=Ponto";
                 }
-            },
-            error: function (data) {
-                $.notify('Erro ao solicitar coleta', "warning");
+              })
+            } else {
+              $.notify('Erro ao excluir solicitação de tornar-se ponto', "warning");
             }
+          },
+          error : function(data) {
+            $.notify('Erro ao excluir solicitação de tornar-se ponto', "warning");
+          }
         });
+      }
+    })
+  }
+
+  $().ready(function () {
+
+    document.getElementById("formPonto").addEventListener("submit", function(event){
+      event.preventDefault();
+      if (this.checkValidity()) {
+        $.ajax({
+          type: 'POST',
+          url: $('#formPonto').attr('action'),
+          data: $('#formPonto').serialize(),
+          dataType: "json",
+          success: function (data) {
+            if (data.status) {
+              $('#tabelaPonto').DataTable().ajax.reload();
+              $.notify(data.msg, "success");
+            } else {
+              $.notify(data.msg, "warning");
+            }
+          },
+          error: function (data) {
+            $.notify('Erro ao solicitar tornar-se ponto', "warning");
+          }
+        });
+      }
     });
 
-    document.getElementById("formColeta-edicao").addEventListener("submit", function(event){
-        event.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: 'index.php?r=atualizarColeta&idColeta=' + $('#formColeta-edicao').attr('idColeta'),
-            data: $('#formColeta-edicao').serialize(),
-            dataType: "json",
-            success: function (data) {
-                if (data.status) {
-                    $.notify('Solicitação atualizada com sucesso', "success");
-                    $('#tabelaColeta').DataTable().ajax.reload();
-                    $('#modalEdicao').modal('hide');
-                } else {
-                    $.notify('Erro ao atualizar solicitação de coleta', "warning");
-                }
-            },
-            error: function (data) {
-                $.notify('Erro ao atualizar solicitação de coleta', "warning");
-            }
-        });
-    });
 
-    $('#tabelaColeta').DataTable({
-        ajax: {url: 'index.php?r=carregarColeta', dataSrc:''},
-        "oLanguage": {
-            "sUrl": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+    $('#tabelaPonto').DataTable({
+      ajax: {url: 'index.php?r=carregarPonto', dataSrc:''},
+      "oLanguage": {
+        "sUrl": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+      },
+      columns: [
+        { data: 'dataSolicitacao' },
+        { data: 'cnpj' },
+        { data: 'nome' },
+        { data: null, render: function(data,type,row){
+
+            $('#descricao').html(data.descricao);
+            $('#cnpj').val(data.cnpj);
+            $('#nome').val(data.nome);
+            $('#logradouro').val(data.logradouro);
+            $('#numero').val(data.numero);
+            $('#complemento').val(data.complemento);
+            $('#cep').val(data.cep);
+            $('#bairro').val(data.bairro);
+            $('#municipio').val(data.municipio);
+            $('#telefone').val(data.telefone);
+            $('#estado').val((data.estado != null ? data.estado : 'RS'));
+            if(data.nome != null) {
+              $('#formPonto').attr('action', 'index.php?r=atualizarPonto&idPonto=' + data.idInstituicao);
+              $('.btn-salvar').html('Alterar solicitação')
+            }
+
+            return (data.situacao == 1 ? 'Pendente' : 'Aprovado');
+          }
         },
-        columns: [
-            { data: 'dataSolicitacao' },
-            { data: 'descricao' },
-            { data: 'datas' },
-            { data: null, render: function(data,type,row){
-                    return '' +
-                        '<span class="text-nowrap">' +
-                        '<span onclick="editar(' + data.idColeta + ')" class="btn"><i class="fas fa-edit text-success"></i></span>' +
-                        '<span onclick="deletar(' + data.idColeta + ')" class="btn"><i class="fas fa-trash-alt text-danger"></i></span>' +
-                        '</span>';
-                }
-            },
-        ],
+        { data: null, render: function(data,type,row){
+            return '' +
+                    '<span class="text-nowrap">' +
+                    '<span onclick="deletar(' + data.idInstituicao + ')" class="btn"><i class="fas fa-trash-alt text-danger"></i></span>' +
+                    '</span>';
+          }
+        },
+      ],
     });
 
-});
+  });
 </script>
-  </body>
+</body>
 </html>

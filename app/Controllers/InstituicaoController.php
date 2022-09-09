@@ -16,4 +16,16 @@ class InstituicaoController
         $iService = InstituicaoService::getInstance();
         echo $iService->buscarInstituicoes($estado, $municipio);
     }
+
+    public function buscarCnpj()
+    {
+        $iService = InstituicaoService::getInstance();
+        echo $iService->buscarCnpj();
+    }
+
+    public static function read()
+    {
+        $iService = InstituicaoService::getInstance();
+        echo $iService->buscarIdUsuario();
+    }
 }

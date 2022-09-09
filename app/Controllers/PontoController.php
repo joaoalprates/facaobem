@@ -21,9 +21,9 @@ class PontoController
                 $ponto->setAttribute('idUsuario', Session::get('idUsuario'));
                 $ponto->setAttribute('situacao', 1);
                 $ponto->save();
-                echo json_encode(array('status' => true, 'msg' => ''));
+                echo json_encode(array('status' => true, 'msg' => 'Salvo com sucesso'));
             } catch (\Exception $e) {
-                echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar solicitação de ponto'));
+                echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar solicitaÃ§Ã£o de ponto'));
             }
         } else {
             echo json_encode(array('status' => false, 'msg' => 'Erro ao solicitar ponto'));
@@ -43,27 +43,21 @@ class PontoController
             echo json_encode(array('status' => true, 'msg' => ''));
 
         } catch (\Exception $e) {
-            echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar solicitação de ponto'));
+            echo json_encode(array('status' => false, 'msg' => 'Erro ao salvar solicitaÃ§Ã£o de ponto'));
         }
     }
 
-    public static function buscar($id)
+    public static function buscar()
     {
-        $ponto = Instituicao::find((int)$id);
-        echo json_encode($ponto);
+        $ponto = Instituicao::buscarIdUsuario(Session::get('idUsuario'));
+        echo json_encode((isset($ponto[0]) ? $ponto[0] : $ponto));
     }
 
     public static function update($post, $id)
     {
-        $postN = [];
         $ponto = Instituicao::find((int)$id);
-        $postN['descricao'] = $post['descricao-edicao'];
-        $postN['data1'] = $post['data1-edicao'];
-        $postN['data2'] = $post['data2-edicao'];
-        $postN['turno1'] = $post['turno1-edicao'];
-        $postN['turno2'] = $post['turno2-edicao'];
-        $ponto->fill($postN);
+        $ponto->fill($post);
         $ponto->save();
-        echo json_encode(array('status' => true, 'msg' => ''));
+        echo json_encode(array('status' => true, 'msg' => 'Editado com sucesso'));
     }
 }

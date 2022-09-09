@@ -43,4 +43,18 @@ class Instituicao extends Model
         WHERE estado = ?", [$estado]);
     }
 
+    public static function buscarCnpj(int $idUsuario){
+        return Capsule::select("
+        SELECT cnpj
+        FROM instituicoes
+        WHERE idUsuario = ?", [$idUsuario]);
+    }
+
+    public static function buscarIdUsuario(int $idUsuario){
+        return Capsule::select("
+        BEGIN TRANSACTION;
+        SELECT *, CONVERT(VARCHAR, created_at, 103) AS dataSolicitacao
+        FROM instituicoes
+        WHERE idUsuario = ?; COMMIT;", [$idUsuario]);
+    }
 }
