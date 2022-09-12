@@ -35,6 +35,11 @@ class PontoController
         echo json_encode(Instituicao::buscarIdUsuario(Session::get('idUsuario')));
     }
 
+    public static function all()
+    {
+        echo json_encode(Instituicao::readAll());
+    }
+
     public static function delete($id)
     {
         try {
@@ -59,5 +64,13 @@ class PontoController
         $ponto->fill($post);
         $ponto->save();
         echo json_encode(array('status' => true, 'msg' => 'Editado com sucesso'));
+    }
+
+    public static function alterarSituacaoPonto($get)
+    {
+        $ponto = Instituicao::find((int)$get['id']);
+        $ponto->fill(array('situacao' => $get['situacao']));
+        $ponto->save();
+        echo json_encode(array('status' => true, 'msg' => 'Situação alterada com sucesso'));
     }
 }

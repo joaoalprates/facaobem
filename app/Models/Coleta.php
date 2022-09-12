@@ -32,4 +32,13 @@ class Coleta extends Model
         FROM coletas
         WHERE idUsuario = ?", [$idUsuario]);
     }
+
+    public static function readAll(){
+        return Capsule::select("
+        BEGIN TRANSACTION;
+        SELECT idColeta, situacao, CONVERT(VARCHAR, created_at, 103) AS dataSolicitacao, descricao, 
+               CONVERT(VARCHAR, data1, 103) + ' - ' + CASE WHEN turno1 = 'M' THEN 'Manh&atilde' ELSE 'Tarde' END + ' ou ' +
+               CONVERT(VARCHAR, data2, 103) + ' - ' + CASE WHEN turno2 = 'M' THEN 'Manh&atilde' ELSE 'Tarde' END as datas
+        FROM coletas; COMMIT;");
+    }
 }

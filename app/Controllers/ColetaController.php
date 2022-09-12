@@ -7,6 +7,11 @@ use FacaOBem\Models\Coleta;
 
 class ColetaController
 {
+    public static function all()
+    {
+        echo json_encode(Coleta::readAll());
+    }
+
     public static function index()
     {
         require './app/Views/coleta.html';
@@ -28,6 +33,14 @@ class ColetaController
         } else {
             echo json_encode(array('status' => false, 'msg' => 'Erro ao solicitar coleta'));
         }
+    }
+
+    public static function alterarSituacaoColeta($get)
+    {
+        $coleta = Coleta::find((int)$get['id']);
+        $coleta->fill(array('situacao' => $get['situacao']));
+        $coleta->save();
+        echo json_encode(array('status' => true, 'msg' => 'Situação alterada com sucesso'));
     }
 
     public static function read()

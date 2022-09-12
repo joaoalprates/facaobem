@@ -107,4 +107,22 @@ switch ($route) {
     case 'CarregarCnpj':
         InstituicaoController::buscarCnpj();
         break;
+    case 'Admin':
+        if($_GET['hash'] != 'sadu8721hjklsa-=231kjnl7s8a9dsam1k23') {
+            header("Location: $base_url?r=Login");
+        }
+        LoginController::telaAdmin();
+        break;
+    case 'carregarPontoGeral':
+        PontoController::all();
+        break;
+    case 'AlterarSituacaoPonto':
+        PontoController::alterarSituacaoPonto($_GET);
+        break;
+    case 'carregarColetaGeral':
+        ColetaController::all();
+        break;
+    case 'AlterarSituacaoColeta':
+        ColetaController::alterarSituacaoColeta($_GET);
+        break;
 }

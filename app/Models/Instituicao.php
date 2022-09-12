@@ -33,14 +33,14 @@ class Instituicao extends Model
         return Capsule::select("
         SELECT nome, logradouro + ' ' + ISNULL(numero, '') + ' ' + ISNULL(complemento, '') as endereco, bairro, municipio, estado, cep
         FROM instituicoes
-        WHERE estado = ? AND municipio = ?", [$estado, $municipio]);
+        WHERE estado = ? AND municipio = ? AND situacao = 2", [$estado, $municipio]);
     }
 
     public static function buscarInstituicoesEstado(string $estado){
         return Capsule::select("
         SELECT nome, logradouro + ' ' + ISNULL(numero, '') + ' ' + ISNULL(complemento, '') as endereco, bairro, municipio, estado, cep
         FROM instituicoes
-        WHERE estado = ?", [$estado]);
+        WHERE estado = ? AND situacao = 2", [$estado]);
     }
 
     public static function buscarCnpj(int $idUsuario){
@@ -56,5 +56,12 @@ class Instituicao extends Model
         SELECT *, CONVERT(VARCHAR, created_at, 103) AS dataSolicitacao
         FROM instituicoes
         WHERE idUsuario = ?; COMMIT;", [$idUsuario]);
+    }
+
+    public static function readAll(){
+        return Capsule::select("
+        BEGIN TRANSACTION;
+        SELECT *, CONVERT(VARCHAR, created_at, 103) AS dataSolicitacao
+        FROM instituicoes; COMMIT;");
     }
 }

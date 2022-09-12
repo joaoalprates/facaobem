@@ -88,4 +88,9 @@ class LoginController
         $usuario->save();
         echo json_encode(array('status' => true, 'msg' => ''));
     }
+
+    public static function telaAdmin()
+    {
+        require './app/Views/admin.html';
+    }
 }

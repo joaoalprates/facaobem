@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8"/>
+  <title>Faça o Bem - Ajude Alguém - Área do administrador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Augusto Lumi">
+
+  <link href="././public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="././public/css/datatables.min.css" rel="stylesheet">
+  <link href="././public/css/form-validation.css" rel="stylesheet">
+
+  <style>
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="././public/css/headers.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<main>
+  <h1 class="visually-hidden">Ajude Alguém</h1>
+
+  <div style="background-color: #a2c4c9" >
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img class="bi me-2" src="././public/images/Logo.png" width="100" height="90" alt="Logo">
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <h1>Ajude Alguém - Faça o Bem</h1>
+      </ul>
+
+      <div class="col-md-2 text-end d-inline-block" >
+        <div class="d-flex text-end d-block float-end">
+          <a href="index.php">
+            <button type="button" class="btn btn-outline-primary me-2"><i class="fas fa-home"></i> Home</button>
+          </a>
+        </div>
+        <?php if(array_key_exists('idUsuario', FacaOBem\Helpers\Session::getAll())){
+
+            ?>
+
+        <div class="dropdown d-block  float-end me-2">
+          <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item disabled" href="#"><?php echo FacaOBem\Helpers\Session::get('nome');?></a></li>
+            <li><a class="dropdown-item" href="././index.php?r=Sair">Sair</a></li>
+          </ul>
+        </div>
+        <?php }?>
+
+      </div>
+    </header>
+  </div>
+
+  <div class="container-xl">
+    <div class="row">
+      <div class="col-12 mt-4 mb-3">
+        <h2>Área do Administrador</h2><hr>
+        <h4>Solicitações de agendamento de coleta</h4><hr>
+      </div>
+      <div class="col-12">
+        <table id="tabelaColeta" class="display" style="width:100%">
+          <thead>
+          <tr>
+            <th>Data da solicitação</th>
+            <th>Comentário</th>
+            <th>Opções de datas</th>
+            <th>Situação</th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-xl">
+    <div class="row">
+      <div class="col-12 mt-4 mb-3">
+        <h4>Solicitações de torna-se ponto</h4><hr>
+      </div>
+      <div class="col-12" id="lista-instituicoes">
+        <table id="tabelaPonto" class="display" style="width:100%">
+          <thead>
+          <tr>
+            <th>Data da solicitação</th>
+            <th>CNPJ</th>
+            <th>Nome</th>
+            <th>Situação</th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src=././public/js/jquery.min.js></script>
+<script src=././public/js/bootstrap.bundle.min.js></script>
+<script src=././public/js/notify.min.js></script>
+<script src=././public/js/datatables.min.js></script>
+<script src=././public/js/form-validation.js></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+  function alterarSituacaoPonto(id, obj){
+    $.ajax({
+      type: "GET",
+      url: 'index.php?r=AlterarSituacaoPonto&id=' + id + '&situacao=' + $(obj).val(),
+      dataType: "json",
+      success: function(data) {
+        $.notify(data.msg, "success");
+      },
+      error : function(data) {
+        $.notify('Erro ao salva situação', "warning");
+      }
+    });
+  }
+
+  function alterarSituacaoColeta(id, obj){
+    $.ajax({
+      type: "GET",
+      url: 'index.php?r=AlterarSituacaoColeta&id=' + id + '&situacao=' + $(obj).val(),
+      dataType: "json",
+      success: function(data) {
+        $.notify(data.msg, "success");
+      },
+      error : function(data) {
+        $.notify('Erro ao salva situação', "warning");
+      }
+    });
+  }
+
+  $().ready(function () {
+
+    $('#tabelaColeta').DataTable({
+      ajax: {url: 'index.php?r=carregarColetaGeral', dataSrc:''},
+      "oLanguage": {
+        "sUrl": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+      },
+      columns: [
+        { data: 'dataSolicitacao' },
+        { data: 'descricao' },
+        { data: 'datas' },
+        { data: null, render: function(data,type,row){
+            return '<select class="form-select" idColeta="' + data.idColeta + '" onchange="alterarSituacaoColeta(' + data.idColeta + ', this)" id="situacao" name="situacao">\n' +
+                    '                                        <option value="1" ' + (data.situacao == 1 ? 'selected="selected"' : '') + '>Pendente</option>\n' +
+                    '                                        <option value="2" ' + (data.situacao == 2 ? 'selected="selected"' : '') + '>Aprovado</option>\n' +
+                    '                                    </select>'
+          }
+        }
+      ],
+    });
+
+    $('#tabelaPonto').DataTable({
+      ajax: {url: 'index.php?r=carregarPontoGeral', dataSrc:''},
+      "oLanguage": {
+        "sUrl": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+      },
+      columns: [
+        { data: 'dataSolicitacao' },
+        { data: 'cnpj' },
+        { data: 'nome' },
+        { data: null, render: function(data,type,row){
+          return '<select class="form-select" idInstituicao="' + data.idInstituicao + '" onchange="alterarSituacaoPonto(' + data.idInstituicao + ', this)" id="situacao" name="situacao">\n' +
+                  '                                        <option value="1" ' + (data.situacao == 1 ? 'selected="selected"' : '') + '>Pendente</option>\n' +
+                  '                                        <option value="2" ' + (data.situacao == 2 ? 'selected="selected"' : '') + '>Aprovado</option>\n' +
+                  '                                    </select>'
+          }
+        }
+      ],
+    });
+
+  });
+</script>
+</body>
+</html>
