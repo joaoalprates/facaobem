@@ -150,14 +150,35 @@
       </div>
   </main>
 
-<script src=././public/js/jquery.min.js></script>
-<script src=././public/js/bootstrap.bundle.min.js></script>
-<script src=././public/js/notify.min.js></script>
-<script src=././public/js/form-validation.js></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
+    <script src=././public/js/jquery.min.js></script>
+    <script src=././public/js/bootstrap.bundle.min.js></script>
+    <script src=././public/js/notify.min.js></script>
+    <script src=././public/js/form-validation.js></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+
+    <script>
 
   $(function () {
+
+    $('#cpf').mask('999.999.999-99', {reverse: true});
+    $('#cep').mask('99999-999');
+
+    jQuery("#telefone")
+            .mask("(99) 9999-9999?9")
+            .focusout(function (event) {
+              var target, phone, element;
+              target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+              phone = target.value.replace(/\D/g, '');
+              element = $(target);
+              element.unmask();
+              if(phone.length > 10) {
+                element.mask("(99) 99999-999?9");
+              } else {
+                element.mask("(99) 9999-9999?9");
+              }
+            });
 
     document.getElementById("formCadastro").addEventListener("submit", function(event){
       event.preventDefault();
