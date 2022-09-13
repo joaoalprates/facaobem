@@ -68,16 +68,46 @@
                 <div class="col-12 text-center">
                   <hr class="my-4">
                   <button class="w-100 btn btn-primary btn-lg mb-3" type="submit">Entrar</button>
+                  <a href="javascript:void(0)" onclick="abrirModalSenha()" >Esqueci minha senha</a><br/>
+                </div>
+                <div class="col-12 text-center">
                   <a href="index.php?r=Inscricao" >Cadastre-se</a>
                 </div>
               </div>
-
             </form>
-
           </div>
         </div>
       </div>
   </main>
+    <div class="modal" id="modalEsqueciSenha" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form class="needs-validation" novalidate id="formEsqueciSenha" name="formEsqueciSenha">
+            <div class="modal-header">
+              <h5 class="modal-title">Recuperação de senha</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="col-12">
+                <label for="emailR" class="form-label">E-mail</label>
+                <div class="row">
+                  <div class="col-12">
+                    <input type="text" class="form-control" id="emailR" placeholder="E-mail" value="" name="emailR" required>
+                    <div class="invalid-feedback">
+                      E-mail é obrigatório
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary">Recuperar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
 <script src=././public/js/jquery.min.js></script>
 <script src=././public/js/bootstrap.bundle.min.js></script>
@@ -86,7 +116,37 @@
 <script src=././public/js/notify.min.js></script>
 <script src=././public/js/form-validation.js></script>
 <script>
+
+  function abrirModalSenha(){
+    $('#emailR').val('');
+    $('#modalEsqueciSenha').modal('show');
+  }
+
   $().ready(function () {
+
+    document.getElementById("formEsqueciSenha").addEventListener("submit", function(event){
+      event.preventDefault();
+
+      if (this.checkValidity()) {
+        $.ajax({
+          type: 'POST',
+          url: 'index.php?r=RecuperarSenha&email=' + $('#emailR').val(),
+          data: $('#formEsqueciSenha').serialize(),
+          dataType: "json",
+          success: function (data) {
+            if (data.status) {
+              $.notify(data.msg, "success");
+            } else {
+              $.notify(data.msg, "warning");
+            }
+            alert('sucesso');
+          },
+          error: function (data) {
+            $.notify('Senha enviada ao seu e-mail', "success");
+          }
+        });
+      }
+    });
 
     document.getElementById("formLogin").addEventListener("submit", function(event){
       event.preventDefault();

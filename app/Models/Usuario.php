@@ -35,4 +35,11 @@ class Usuario extends Model
         FROM usuarios
         WHERE email = ? AND senha = ?", [$email, $senha]);
     }
+
+    public static function buscarPorEmail(string $email){
+        return Capsule::select("
+        SELECT *
+        FROM usuarios
+        WHERE email = ?", [$email]);
+    }
 }

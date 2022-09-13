@@ -2,6 +2,7 @@
 
 ini_set('date.timezone', 'America/Sao_Paulo');
 
+use FacaOBem\Controllers\EmailController;
 use FacaOBem\Controllers\HomeController;
 use FacaOBem\Controllers\InstituicaoController;
 use FacaOBem\Controllers\LoginController;
@@ -124,5 +125,8 @@ switch ($route) {
         break;
     case 'AlterarSituacaoColeta':
         ColetaController::alterarSituacaoColeta($_GET);
+        break;
+    case 'RecuperarSenha':
+        EmailController::enviarEmail($_POST['emailR']);
         break;
 }

@@ -1,10 +1,18 @@
 {
     "require": {
-        "illuminate/database": "^5.4"
+        "illuminate/database": "^5.4",
+        "phpmailer/phpmailer": "^6.6"
     },
     "autoload": {
         "psr-4": {
-            "FacaOBem\\": "app/"
+            "FacaOBem\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
         }
     }
 }
